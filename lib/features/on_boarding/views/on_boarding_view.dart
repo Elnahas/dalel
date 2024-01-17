@@ -15,7 +15,8 @@ class OnBoardingView extends StatelessWidget {
       child: Scaffold(
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
+          child: ListView(
+            physics: BouncingScrollPhysics(),
             children: [
               SizedBox(height: 40,),
           
