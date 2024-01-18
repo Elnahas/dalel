@@ -1,6 +1,7 @@
 import 'package:dalel/core/utils/app_assets.dart';
 import 'package:dalel/core/utils/app_strings.dart';
 import 'package:dalel/core/utils/app_text_styles.dart';
+import 'package:dalel/features/on_boarding/data/models/on_boarding_model.dart';
 import 'package:dalel/features/on_boarding/views/widgets/custom_smooth_page_indicator.dart';
 import 'package:flutter/material.dart';
 
@@ -14,20 +15,20 @@ class OnBoardingWidgetBody extends StatelessWidget {
     return SizedBox(
       height: 600,
       child: PageView.builder(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         controller: _controller,
-        itemCount: 3,
+        itemCount: onBoardingData.length,
         itemBuilder: (context, index) {
           return  Column(
             children: [
               Container(
                 height: 390,
                 width: 343,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   
                     image: DecorationImage(
                       fit: BoxFit.fill,
-                        image: AssetImage(Assets.assetsImagesOnBoarding1))),
+                        image: AssetImage(onBoardingData[index].imagePath))),
               ),
              const SizedBox(
                 height: 24,
@@ -39,7 +40,7 @@ class OnBoardingWidgetBody extends StatelessWidget {
                 height: 32,
               ),
               Text(
-                "Explore The history with Dalel in a smart way",
+                onBoardingData[index].title,
                 style: CustomTextStyles.poppins500style24
                     .copyWith(fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
@@ -49,8 +50,8 @@ class OnBoardingWidgetBody extends StatelessWidget {
              const SizedBox(
                 height: 16,
               ),
-             const Text(
-                "Explore The history with Dalel in a smart way",
+              Text(
+               onBoardingData[index].subTitle,
                 style: CustomTextStyles.poppins300style16,
                 textAlign: TextAlign.center,
               )
