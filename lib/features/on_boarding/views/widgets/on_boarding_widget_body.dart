@@ -1,14 +1,13 @@
-import 'package:dalel/core/utils/app_assets.dart';
-import 'package:dalel/core/utils/app_strings.dart';
 import 'package:dalel/core/utils/app_text_styles.dart';
 import 'package:dalel/features/on_boarding/data/models/on_boarding_model.dart';
 import 'package:dalel/features/on_boarding/views/widgets/custom_smooth_page_indicator.dart';
 import 'package:flutter/material.dart';
 
 class OnBoardingWidgetBody extends StatelessWidget {
-  OnBoardingWidgetBody({super.key});
+  OnBoardingWidgetBody({super.key, required this.controler, this.onPageChanged});
 
-  final PageController _controller = PageController();
+  final PageController controler ;
+  final Function(int)? onPageChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,8 @@ class OnBoardingWidgetBody extends StatelessWidget {
       height: 600,
       child: PageView.builder(
         physics: const BouncingScrollPhysics(),
-        controller: _controller,
+        controller: controler,
+        onPageChanged: onPageChanged,
         itemCount: onBoardingData.length,
         itemBuilder: (context, index) {
           return  Column(
@@ -34,7 +34,7 @@ class OnBoardingWidgetBody extends StatelessWidget {
                 height: 24,
               ),
               CustomSmoothPageIndicator(
-                controller: _controller,
+                controller: controler,
               ),
              const SizedBox(
                 height: 32,
