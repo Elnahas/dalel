@@ -10,7 +10,7 @@ abstract class AppStrings {
       //!Auth Strings
       welcome = "Welcome!",
       welcomeBack = "Welcome Back!",
-      fristName = "First Name",
+      firstName = "First Name",
       lastName = "Last Name",
       emailAddress = "Email Address",
       password = "Password",
