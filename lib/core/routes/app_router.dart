@@ -1,5 +1,5 @@
-import 'package:dalel/features/auth/presentation/views/sign_in.dart';
-import 'package:dalel/features/auth/presentation/views/sign_up.dart';
+import 'package:dalel/features/auth/presentation/views/sign_in_view.dart';
+import 'package:dalel/features/auth/presentation/views/sign_up_view.dart';
 import 'package:dalel/features/on_boarding/views/on_boarding_view.dart';
 import 'package:dalel/features/splash/views/splash_view.dart';
 import 'package:go_router/go_router.dart';
