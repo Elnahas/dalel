@@ -29,6 +29,10 @@ class AuthCubit extends Cubit<AuthState> {
 
   bool? termsAndConditionCheckBoxValue = false ;
 
+  bool? obscurePasswordTextValue = true ;
+
+  
+
 
   createUserWithEmailAndPassword() async {
 
@@ -75,6 +79,12 @@ class AuthCubit extends Cubit<AuthState> {
   updateTermsAndConditionCheckBox({required newValue}) {
     termsAndConditionCheckBoxValue = newValue;
     emit(TermsAndConditionUpdateState());
+  }
+
+  
+  obscurePasswordText() {
+    obscurePasswordTextValue = !obscurePasswordTextValue!;
+    emit(ObscurePasswordUpdateState());
   }
 
 }

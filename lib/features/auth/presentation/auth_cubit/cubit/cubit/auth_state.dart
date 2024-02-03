@@ -6,6 +6,7 @@ final class SignupLoadingState extends AuthState {}
 
 final class SignupSuccessState extends AuthState {}
 final class TermsAndConditionUpdateState extends AuthState {}
+final class ObscurePasswordUpdateState extends AuthState {}
 
 final class SignupFailureState extends AuthState {
   final String errMessage ;
