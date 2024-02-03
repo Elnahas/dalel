@@ -39,7 +39,12 @@ class SignUpView extends StatelessWidget {
                 text1: AppStrings.alreadyHaveAnAccount,
                 text2: AppStrings.signUp,
               ),
-            )
+            ),
+                 SliverToBoxAdapter(
+              child: SizedBox(
+                height: 16,
+              ),
+            ),
           ],
         )),
       ),

@@ -17,6 +17,13 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 24.0),
       child: TextFormField(
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "This field is required";
+          }
+          else
+          return null ;
+        },
         onChanged: onChanged,
         onFieldSubmitted: onFieldSubmitted,
         decoration: InputDecoration(

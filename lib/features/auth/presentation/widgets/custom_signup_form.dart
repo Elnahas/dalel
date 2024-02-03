@@ -12,24 +12,26 @@ class CustomSignUpForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthCubit authCubit =   BlocProvider.of<AuthCubit>(context);
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        // TODO: implement listener
+        
       },
       builder: (context, state) {
         return Form(
+          key: authCubit.signupFormKye ,
           child: Column(children: [
             CustomTextFormField(labelText: AppStrings.firstName , onChanged: (firstName) {
-              BlocProvider.of<AuthCubit>(context).firstName = firstName;
+              authCubit.firstName = firstName;
             },),
              CustomTextFormField(labelText: AppStrings.lastName , onChanged: (lastName){
-              BlocProvider.of<AuthCubit>(context).lastName = lastName;
+              authCubit.lastName = lastName;
              },),
              CustomTextFormField(labelText: AppStrings.emailAddress , onChanged: (emailAddress){
-              BlocProvider.of<AuthCubit>(context).emailAddress = emailAddress;
+              authCubit.emailAddress = emailAddress;
              },),
              CustomTextFormField(labelText: AppStrings.password , onChanged: (password){
-              BlocProvider.of<AuthCubit>(context).password = password;
+              authCubit.password = password;
              },),
             const TermsAndConditionWidget(),
             const SizedBox(
@@ -37,9 +39,10 @@ class CustomSignUpForm extends StatelessWidget {
             ),
             CustomBtn(
               text: AppStrings.signUp,
-              onPressed: () {
-                BlocProvider.of<AuthCubit>(context).createUserWithEmailAndPassword();
-              },
+              onPressed: authCubit.termsAndConditionCheckBoxValue!? () {
+                if(authCubit.signupFormKye.currentState!.validate())
+                authCubit.createUserWithEmailAndPassword();
+              } : null,
             )
           ]),
         );
