@@ -6,6 +6,7 @@ import 'package:dalel/features/auth/presentation/auth_cubit/cubit/cubit/auth_sta
 
 import 'package:firebase_auth/firebase_auth.dart';
 
+
 import 'package:flutter/widgets.dart';
 
 
@@ -19,19 +20,26 @@ class AuthCubit extends Cubit<AuthState> {
 
   String? firstName;
 
+
   String? lastName;
+
 
   String? emailAddress;
 
+
   String? password;
+
 
   GlobalKey<FormState> signupFormKye = GlobalKey();
 
-  bool? termsAndConditionCheckBoxValue = false ;
 
-  bool? obscurePasswordTextValue = true ;
+  GlobalKey<FormState> signinFormKye = GlobalKey(); //Must be unice
 
-  
+
+  bool? termsAndConditionCheckBoxValue = false;
+
+
+  bool? obscurePasswordTextValue = true;
 
 
   createUserWithEmailAndPassword() async {
@@ -76,15 +84,45 @@ class AuthCubit extends Cubit<AuthState> {
 
   }
 
+
   updateTermsAndConditionCheckBox({required newValue}) {
+
     termsAndConditionCheckBoxValue = newValue;
+
+
     emit(TermsAndConditionUpdateState());
+
   }
 
-  
+
   obscurePasswordText() {
+
     obscurePasswordTextValue = !obscurePasswordTextValue!;
+
+
     emit(ObscurePasswordUpdateState());
+
+  }
+
+
+  signInWithEmailAndPassword() async {
+    try {
+      emit(SignInLoadingState());
+       await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: emailAddress!, password: password!);
+
+          emit(SignInSuccessState());
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        emit(SignInFailureState(errMessage: "No user found for that email."));
+        
+      } else if (e.code == 'wrong-password') {
+        emit(SignInFailureState(errMessage: "Wrong password provided for that user."));
+      }
+    } catch(e){
+      emit(SignInFailureState(errMessage: e.toString()));
+    }
+
   }
 
 }
