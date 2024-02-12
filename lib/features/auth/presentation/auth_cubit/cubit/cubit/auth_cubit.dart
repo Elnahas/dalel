@@ -57,6 +57,8 @@ class AuthCubit extends Cubit<AuthState> {
 
       );
 
+      verifyEmail();
+
 
       emit(SignupSuccessState());
 
@@ -74,6 +76,10 @@ class AuthCubit extends Cubit<AuthState> {
 
             errMessage: "The account already exists for that email."));
 
+      } else {
+
+        emit(SignupFailureState(errMessage: e.message.toString()));
+
       }
 
     } catch (e) {
@@ -81,6 +87,12 @@ class AuthCubit extends Cubit<AuthState> {
       emit(SignupFailureState(errMessage: e.toString()));
 
     }
+
+  }
+
+
+  verifyEmail() async {
+    await FirebaseAuth.instance.currentUser!.sendEmailVerification();
 
   }
 
@@ -106,21 +118,35 @@ class AuthCubit extends Cubit<AuthState> {
 
 
   signInWithEmailAndPassword() async {
-    try {
-      emit(SignInLoadingState());
-       await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: emailAddress!, password: password!);
 
-          emit(SignInSuccessState());
+    try {
+
+      emit(SignInLoadingState());
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailAddress!, password: password!);
+
+      emit(SignInSuccessState());
+
     } on FirebaseAuthException catch (e) {
+
       if (e.code == 'user-not-found') {
+
         emit(SignInFailureState(errMessage: "No user found for that email."));
-        
+
       } else if (e.code == 'wrong-password') {
-        emit(SignInFailureState(errMessage: "Wrong password provided for that user."));
+
+        emit(SignInFailureState(
+            errMessage: "Wrong password provided for that user."));
+
+      } else {
+        emit(SignInFailureState(errMessage: e.message.toString()));
+
       }
-    } catch(e){
+
+    } catch (e) {
+
       emit(SignInFailureState(errMessage: e.toString()));
+
     }
 
   }
