@@ -36,6 +36,9 @@ class AuthCubit extends Cubit<AuthState> {
   GlobalKey<FormState> signinFormKye = GlobalKey(); //Must be unice
 
 
+  GlobalKey<FormState> forgotPasswordFormKye = GlobalKey(); //Must be unice
+
+
   bool? termsAndConditionCheckBoxValue = false;
 
 
@@ -56,6 +59,7 @@ class AuthCubit extends Cubit<AuthState> {
         password: password!,
 
       );
+
 
       verifyEmail();
 
@@ -92,6 +96,7 @@ class AuthCubit extends Cubit<AuthState> {
 
 
   verifyEmail() async {
+
     await FirebaseAuth.instance.currentUser!.sendEmailVerification();
 
   }
@@ -122,8 +127,11 @@ class AuthCubit extends Cubit<AuthState> {
     try {
 
       emit(SignInLoadingState());
+
       await FirebaseAuth.instance.signInWithEmailAndPassword(
+
           email: emailAddress!, password: password!);
+
 
       emit(SignInSuccessState());
 
@@ -136,9 +144,11 @@ class AuthCubit extends Cubit<AuthState> {
       } else if (e.code == 'wrong-password') {
 
         emit(SignInFailureState(
+
             errMessage: "Wrong password provided for that user."));
 
       } else {
+
         emit(SignInFailureState(errMessage: e.message.toString()));
 
       }
@@ -149,6 +159,16 @@ class AuthCubit extends Cubit<AuthState> {
 
     }
 
+  }
+
+  resetPasswordWithLink() async {
+    try {
+      emit(ForgotPasswordLoadingState());
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: emailAddress!);
+      emit(ForgotPasswordSuccessState());
+    } catch (e) {
+      emit(ForgotPasswordFailureState(errMessage: e.toString()));
+    }
   }
 
 }

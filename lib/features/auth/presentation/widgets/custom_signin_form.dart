@@ -54,7 +54,9 @@ class CustomSignInForm extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            ForgotPasswordTextWidget(),
+            ForgotPasswordTextWidget(onTap: () {
+              customReplacementNavigate(context, "/forgotPassword");
+            },),
             const SizedBox(
               height: 102,
             ),
