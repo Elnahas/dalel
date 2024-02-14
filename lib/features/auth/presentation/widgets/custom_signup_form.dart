@@ -72,10 +72,11 @@ class CustomSignUpForm extends StatelessWidget {
                 : CustomBtn(
                     text: AppStrings.signUp,
                     onPressed: authCubit.termsAndConditionCheckBoxValue!
-                        ? () {
+                        ? () async {
                             if (authCubit.signupFormKye.currentState!
-                                .validate())
-                              authCubit.createUserWithEmailAndPassword();
+                                .validate()) {
+                              await authCubit.createUserWithEmailAndPassword();
+                            }
                           }
                         : null,
                   )

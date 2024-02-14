@@ -15,17 +15,10 @@ class SignInView extends StatelessWidget {
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
+          const SliverToBoxAdapter(child: WelcomeBanner()),
+          const SliverToBoxAdapter(child: SizedBox(height: 32)),
           const SliverToBoxAdapter(
-            child: WelcomeBanner(),
-          ),
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 32,
-            ),
-          ),
-          const SliverToBoxAdapter(
-            child: WelcomeTextWidget(text: AppStrings.welcomeBack),
-          ),
+              child: WelcomeTextWidget(text: AppStrings.welcomeBack)),
           const SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),

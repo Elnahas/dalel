@@ -11,22 +11,25 @@ class WelcomeBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 290,
+      decoration: BoxDecoration(color: AppColors.primaryColor),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Text(AppStrings.appName , style: CustomTextStyles.saira700style32,),
-          SizedBox(height: 18,),
+          Text(AppStrings.appName,
+              style: CustomTextStyles.saira700style32
+                  .copyWith(fontSize: 42, fontWeight: FontWeight.bold)),
+          SizedBox(height: 18),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-            SvgPicture.asset(Assets.assetsImagesVector1),
-            SvgPicture.asset(Assets.assetsImagesVector2),
-          ],)
+              SvgPicture.asset(Assets.assetsImagesVector1),
+              SvgPicture.asset(Assets.assetsImagesVector2),
+            ],
+          )
         ],
       ),
-      height: 290,
-      decoration: BoxDecoration(color: AppColors.primaryColor),
     );
   }
 }

@@ -29,13 +29,13 @@ final class SignInFailureState extends AuthState {
   SignInFailureState({required this.errMessage});
 }
 
-final class ForgotPasswordLoadingState extends AuthState {}
+final class ResetPasswordLoadingState extends AuthState {}
 
-final class ForgotPasswordSuccessState extends AuthState {}
+final class ResetPasswordSuccessState extends AuthState {}
 
 
-final class ForgotPasswordFailureState extends AuthState {
+final class ResetPasswordFailureState extends AuthState {
   final String errMessage ;
 
-  ForgotPasswordFailureState({required this.errMessage});
+  ResetPasswordFailureState({required this.errMessage});
 }

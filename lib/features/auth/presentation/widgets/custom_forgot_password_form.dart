@@ -18,11 +18,11 @@ class CustomForgotPasswordForm extends StatelessWidget {
 
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        if(state is ForgotPasswordSuccessState){
+        if(state is ResetPasswordSuccessState){
           showToast("Check Your Email To Reset Your Password");
           customReplacementNavigate(context, "/signIn");
         }
-        else if(state is ForgotPasswordFailureState){
+        else if(state is ResetPasswordFailureState){
           showToast(state.errMessage);
         }
       },
@@ -41,15 +41,15 @@ class CustomForgotPasswordForm extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 129),
-                state is ForgotPasswordLoadingState
+                state is ResetPasswordLoadingState
                     ? CircularProgressIndicator(
                         color: AppColors.primaryColor,
                       )
                     : CustomBtn(
                         text: AppStrings.sendResetPasswordLink,
-                        onPressed: () {
+                        onPressed: () async{
                           if(authCubit.forgotPasswordFormKye.currentState!.validate()){
-                          authCubit.resetPasswordWithLink();
+                        await  authCubit.resetPasswordWithLink();
 
                           }
                         })
