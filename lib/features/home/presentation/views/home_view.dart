@@ -15,9 +15,13 @@ class HomeView extends StatelessWidget {
         child: CustomScrollView(
           physics: BouncingScrollPhysics(),
           slivers: [
+            //!Appbar
             SliverToBoxAdapter(child: HomeAppBarSection()),
+            //!Historical Peeridos
             SliverToBoxAdapter(child: HistoricalPeriodsSection()),
+            //!Historical Characters
             SliverToBoxAdapter(child: HistoricalCharactersSection()),
+            //!Historical Souvenirs
             SliverToBoxAdapter(child: HistoricalSouvenirsSection()),
           ],
         ),

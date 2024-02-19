@@ -1,7 +1,7 @@
-
-import 'package:dalel/core/utils/app_assets.dart';
-import 'package:dalel/core/utils/app_colors.dart';
-import 'package:dalel/core/utils/app_text_styles.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dalel/core/utils/app_strings.dart';
+import 'package:dalel/features/home/data/models/historical_periods_model.dart';
+import 'package:dalel/features/home/presentation/widgets/historical_period_item.dart';
 import 'package:flutter/material.dart';
 
 class HistoricalPeriods extends StatelessWidget {
@@ -9,52 +9,46 @@ class HistoricalPeriods extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [HistoricalPeriodItem(), HistoricalPeriodItem()],
-    );
-  }
-}
+    return FutureBuilder<QuerySnapshot>(
+        future: FirebaseFirestore.instance
+            .collection(FireBaseStrings.historicalPeriods)
+            .get(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return const Text("Something went wrong");
+          }
 
-class HistoricalPeriodItem extends StatelessWidget {
-  const HistoricalPeriodItem({super.key});
+          if (snapshot.hasData && !snapshot.data!.docs[0].exists) {
+            return const Text("Document does not exist");
+          }
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 164,
-      height: 96,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(5),
-          boxShadow: [
-            BoxShadow(
-                color: AppColors.grey, blurRadius: 10, offset: Offset(0, 7))
-          ]),
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        SizedBox(width: 16,),
-        SizedBox(
-            height: 48,
-            width: 62,
-            child: Text(
-              "Ancient Egypt",
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-              style: CustomTextStyles.poppins500style18
-                  .copyWith(fontSize: 15, color: AppColors.deepBrown),
-            )),
-        Container(
-          height: 64,
-          width: 47,
-          decoration: const BoxDecoration(
-              image:
-                  DecorationImage(image: AssetImage(Assets.assetsImagesFrame))),
+          if (snapshot.connectionState == ConnectionState.done) {
+            List<HistoricalPeriodsModel> historicalPeriods = [];
+            for (int i = 0; i < snapshot.data!.docs.length; i++) {
+              historicalPeriods
+                  .add(HistoricalPeriodsModel.fromJson(snapshot.data!.docs[i]));
+            }
 
-        ),
+            return SizedBox(
+              height: 96,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                clipBehavior: Clip.none,
+                itemBuilder: (context, index) {
+                  return HistoricalPeriodItem(
+                    historicalPeriodsModel: historicalPeriods[index],
+                  );
+                },
+                itemCount: snapshot.data!.docs.length,
+                separatorBuilder: (context, index) => const SizedBox(
+                  width: 10,
+                ),
+              ),
+            );
+          }
 
-        SizedBox(width: 16,),
-      ]),
-    );
+          return const Text("loading");
+        });
   }
 }
