@@ -1,12 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dalel/core/utils/app_colors.dart';
 import 'package:dalel/core/utils/app_text_styles.dart';
 import 'package:dalel/features/home/data/models/historical_periods_model.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HistoricalPeriodItem extends StatelessWidget {
   const HistoricalPeriodItem({super.key, required this.historicalPeriodsModel});
 
-final HistoricalPeriodsModel historicalPeriodsModel ;
+  final HistoricalPeriodsModel historicalPeriodsModel;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,9 @@ final HistoricalPeriodsModel historicalPeriodsModel ;
                 color: AppColors.grey, blurRadius: 10, offset: Offset(0, 7))
           ]),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        SizedBox(width: 16,),
+        SizedBox(
+          width: 16,
+        ),
         SizedBox(
             height: 48,
             width: 62,
@@ -36,13 +40,28 @@ final HistoricalPeriodsModel historicalPeriodsModel ;
         Container(
           height: 64,
           width: 47,
-          decoration:  BoxDecoration(
-              image:
-                  DecorationImage(image: NetworkImage(historicalPeriodsModel.image))),
+          child: CachedNetworkImage(
+            imageUrl: historicalPeriodsModel.image,
+            placeholder: (context, url) => Shimmer.fromColors(
+              baseColor: AppColors.grey,
+              highlightColor: Colors.white,
+              child: Container(
+                width: 47,
+                height: 64,
+                color: AppColors.grey,
+              ),
+            ),
 
+            errorWidget: (context, url, error) => Icon(Icons.error),
+          ),
+
+          // decoration:  BoxDecoration(
+          //     image:
+          //         DecorationImage(image: NetworkImage(historicalPeriodsModel.image))),
         ),
-
-        SizedBox(width: 16,),
+        SizedBox(
+          width: 16,
+        ),
       ]),
     );
   }

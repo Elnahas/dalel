@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dalel/core/utils/app_strings.dart';
 import 'package:dalel/core/widgets/custom_header_text.dart';
 import 'package:dalel/features/home/presentation/widgets/historical_periods.dart';
