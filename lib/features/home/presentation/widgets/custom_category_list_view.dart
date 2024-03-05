@@ -25,7 +25,7 @@ class CustomCategoryListView extends StatelessWidget {
             List<HistoricalPeriodsModel> historicalPeriods = [];
             for (int i = 0; i < snapshot.data!.docs.length; i++) {
               historicalPeriods
-                  .add(HistoricalPeriodsModel.fromJson(snapshot.data!.docs[i]));
+                  .add(HistoricalPeriodsModel.fromJson(snapshot.data!.docs[i],[]));
             }
 
                return SizedBox(
