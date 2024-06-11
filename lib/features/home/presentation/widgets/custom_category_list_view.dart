@@ -14,7 +14,7 @@ class CustomCategoryListView extends StatelessWidget {
       builder: (context,snapshot) {
 
           if (snapshot.hasError) {
-            return const Text("Something went wrong");
+            return const Text("Something went wrong!!");
           }
 
           if (snapshot.hasData && !snapshot.data!.docs[0].exists) {
