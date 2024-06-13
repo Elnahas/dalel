@@ -1,6 +1,4 @@
-import 'package:dalel/core/database/cache/cache_helper.dart';
 import 'package:dalel/core/functions/navigation.dart';
-import 'package:dalel/core/services/service_locator.dart';
 import 'package:dalel/features/on_boarding/functions/on_boarding.dart';
 import 'package:dalel/features/on_boarding/views/widgets/custom_nav_bar.dart';
 import 'package:dalel/features/on_boarding/views/widgets/get_buttons.dart';
@@ -25,7 +23,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: ListView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             children: [
               SizedBox(
                 height: 40,
@@ -43,7 +41,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                 },
               ),
               GetButtons(controller: _controller , currentIndex: currentIndex),
-              SizedBox(
+              const SizedBox(
                 height: 17,
               )
             ],
