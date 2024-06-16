@@ -28,7 +28,7 @@ class CustomShimmerCategory extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 15),
+        const SizedBox(width: 20),
         SizedBox(
           width: 164.0,
           height: 96.0,
