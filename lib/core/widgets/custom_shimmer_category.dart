@@ -1,6 +1,7 @@
 import 'package:dalel/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomShimmerCategory extends StatelessWidget {
   const CustomShimmerCategory({
