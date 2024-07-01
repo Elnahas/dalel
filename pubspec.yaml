@@ -28,22 +28,53 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  # Library for efficiently displaying and caching images from the internet
   cached_network_image: ^3.3.1
+  
+  # Library for interacting with Google Cloud Firestore database
   cloud_firestore: ^4.15.4
+  
+  # Cupertino icons for iOS style icons
   cupertino_icons: ^1.0.6
+  
+  # Library for Firebase authentication
   firebase_auth: ^4.17.3
+  
+  # Core library for initializing Firebase in Flutter
   firebase_core: ^2.25.3
+  
+  # Flutter framework SDK
   flutter:
     sdk: flutter
+  
+  # Library for state management using the BLoC pattern
   flutter_bloc: ^8.1.3
+  
+  # Library for rendering SVG images in Flutter
   flutter_svg: ^2.0.9
+  
+  # Library for displaying toast notifications
   fluttertoast: ^8.2.4
+  
+  # Dependency injection library
   get_it: ^7.6.7
+  
+  # Router library for handling navigation in Flutter apps
   go_router: ^13.0.1
+  
+  # Library for creating persistent bottom navigation bars
   persistent_bottom_nav_bar: ^5.0.2
+  
+  # Library for handling shared preferences for persistent storage
   shared_preferences: ^2.2.2
+  
+  # Library for adding shimmer effect (loading indicators)
   shimmer: ^3.0.0
+  
+  # Library for creating smooth page indicators
   smooth_page_indicator: ^1.1.0
+  
+  # Library for launching URLs in the default browser
   url_launcher: ^6.3.0
 
 dev_dependencies:
